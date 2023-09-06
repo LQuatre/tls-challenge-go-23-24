@@ -13,7 +13,7 @@ func PrintComb2() {
 						z01.PrintRune(' ')
 						z01.PrintRune(rune(k))
 						z01.PrintRune(rune(l))
-						if i != '9' || j != '9' || k != '9' || l != '9' {
+						if i != '9' || j != '8' || k != '9' || l != '9' {
 							z01.PrintRune(rune(','))
 							z01.PrintRune(rune(' '))
 						}
