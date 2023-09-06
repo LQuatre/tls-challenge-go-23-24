@@ -4,25 +4,25 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func Int64ToString(n int) string {
+func UintToString(n uint) string {
 	var res string
-	var neg bool
-	if n < 0 {
-		neg = true
-		n = -n
-	}
 	for n > 0 {
 		res = string(n%10+48) + res
 		n /= 10
 	}
-	if neg {
-		res = "-" + res
-	}
 	return res
 }
 
+func IntToString(n int) string {
+	if n < 0 {
+		z01.PrintRune('-')
+		return UintToString(uint(-n))
+	}
+	return UintToString(uint(n))
+}
+
 func PrintNbr(n int) {
-	s := Int64ToString(n)
+	s := IntToString(n)
 	for _, r := range s {
 		z01.PrintRune(r)
 	}
