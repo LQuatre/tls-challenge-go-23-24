@@ -4,7 +4,7 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func Int64ToString(n int64) string {
+func Int64ToString(n int) string {
 	var res string
 	var neg bool
 	if n < 0 {
@@ -21,7 +21,7 @@ func Int64ToString(n int64) string {
 	return res
 }
 
-func PrintNbr(n int64) {
+func PrintNbr(n int) {
 	s := Int64ToString(n)
 	for _, r := range s {
 		z01.PrintRune(r)
