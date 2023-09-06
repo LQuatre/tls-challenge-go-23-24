@@ -8,8 +8,8 @@ func PrintComb2() {
 			for k := '0'; k <= '9'; k++ {
 				for l := '0'; l <= '9'; l++ {
 					if i != j {
-						if (i != j || i != k) && (i != k || i != l) && (i != j || i != l) && (j != k || j != l) {
-							// XXX- 				X-XX                   	XX-X					-XXX
+						if (i != j || i != l) && (k != l) {
+							// XX-X					--XX
 							z01.PrintRune(rune(i))
 							z01.PrintRune(rune(j))
 							z01.PrintRune(' ')
@@ -25,4 +25,5 @@ func PrintComb2() {
 			}
 		}
 	}
+	z01.PrintRune('\n')
 }
