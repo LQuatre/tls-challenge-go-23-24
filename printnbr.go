@@ -1,22 +1,44 @@
 package piscine
 
 import (
-	"strconv"
-
 	"github.com/01-edu/z01"
 )
 
-func PrintNbr(n int) { // Les commentaire vont décrire ce que fait la fonction
-	var digits []int // On déclare un tableau de int
+func Itoa(n int) string {
+	var digits []int
 
-	s := strconv.Itoa(n) // On convertit le int en string
-
-	for _, m := range s { // On parcourt le string
-		digits = append(digits, int(m-'0')) // On ajoute chaque chiffre dans le tableau
+	if n == 0 {
+		return "0"
 	}
 
-	for _, val := range digits { // On parcourt le tableau
-		ascii := rune(val + 48) // On convertit le int en rune
-		z01.PrintRune(ascii)    // On affiche le rune
+	for n != 0 {
+		digits = append(digits, n%10)
+		n /= 10
+	}
+
+	var res string
+
+	for i := len(digits) - 1; i >= 0; i-- {
+		res += string(digits[i] + 48)
+	}
+
+	return res
+}
+
+func PrintNbr(n int) {
+	if n < 0 {
+		z01.PrintRune('-')
+		n *= -1
+	}
+	var digits []int
+
+	s := Itoa(n)
+
+	for _, m := range s {
+		digits = append(digits, int(m-'0'))
+	}
+
+	for _, val := range digits {
+		z01.PrintRune(rune(val + 48))
 	}
 }
