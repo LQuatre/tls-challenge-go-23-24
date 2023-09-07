@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	s := "Hello World!"
-	s = piscine.StrRev(s)
-	fmt.Println(s)
+	n := 0
+	piscine.PointOne(&n)
+	fmt.Println(n)
 }
