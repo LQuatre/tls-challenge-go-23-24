@@ -13,7 +13,10 @@ func AddFor(n int, prev int, result string, count *int, startNumb int) {
 				if (len(result + string(i+48))) < startNumb {
 					z01.PrintRune('0')
 				}
-				PrintStr(result + string(i+48))
+				for _, r := range result {
+					z01.PrintRune(rune(r))
+				}
+				z01.PrintRune(rune(i) + 48)
 				*count++
 			} else {
 				AddFor(n-1, i, result+string(i+48), count, startNumb)
@@ -27,7 +30,7 @@ func PrintCombN(n int) {
 	var startNumb int = n
 	for i := 0; i < 10; i++ {
 		if n > 1 {
-			AddFor(n-1, i, string(i), &count, startNumb)
+			AddFor(n-1, i, IntToString(i), &count, startNumb)
 		} else {
 			if count > 0 {
 				z01.PrintRune(',')
