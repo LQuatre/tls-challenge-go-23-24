@@ -13,10 +13,7 @@ func AddFor(n int, prev int, result string, count *int, startNumb int) {
 				if (len(result + string(i+48))) < startNumb {
 					z01.PrintRune('0')
 				}
-				for _, r := range result {
-					z01.PrintRune(rune(r))
-				}
-				z01.PrintRune(rune(i) + 48)
+				PrintStr(result + string(i+48))
 				*count++
 			} else {
 				AddFor(n-1, i, result+string(i+48), count, startNumb)
