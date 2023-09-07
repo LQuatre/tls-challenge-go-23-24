@@ -1,10 +1,6 @@
 package piscine
 
-import (
-	"github.com/01-edu/z01"
-)
-
-
+import "github.com/01-edu/z01"
 
 func AddFor(n int, prev int, result string, count *int) {
 	for i := 0; i < 10; i++ {
