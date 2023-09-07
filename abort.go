@@ -1,7 +1,7 @@
 package piscine
 
 func Abort(a, b, c, d, e int) int {
-	args := []int{a, b, c, d, e}
+	var args = []int{a, b, c, d, e}
 	var len = 5
 	var temp int
 	for i := 0; i < len; i++ {
