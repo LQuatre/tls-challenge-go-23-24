@@ -1,7 +1,11 @@
 package main
 
-import "piscine"
+import (
+	"fmt"
+	"piscine"
+)
 
 func main() {
-	piscine.DescendComb()
+	middle := piscine.Abort(2, 3, 8, 5, 7)
+	fmt.Println(middle)
 }
