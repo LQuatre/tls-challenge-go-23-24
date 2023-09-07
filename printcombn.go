@@ -1,6 +1,8 @@
-package main
+package piscine
 
-import "github.com/01-edu/z01"
+import (
+	"github.com/01-edu/z01"
+)
 
 func UintToString(n uint) string {
 	var res string
@@ -19,15 +21,38 @@ func IntToString(n int) string {
 	return UintToString(uint(n))
 }
 
-func PrintCombN(n int) {
-	if n > 0 || n < 10 {
-
+func AddFor(n int, prev int, result string, count *int) {
+	for i := 0; i <= 9; i++ {
+		if prev < i {
+			if n == 1 {
+				if *count > 0 {
+					z01.PrintRune(',')
+					z01.PrintRune(' ')
+				}
+				for _, r := range result {
+					z01.PrintRune(r)
+				}
+				*count++
+			} else {
+				AddFor(n-1, i, result+string(i+48), count)
+			}
+		}
 	}
-	z01.PrintRune('\n')
 }
 
-func main() {
-	PrintCombN(1)
-	PrintCombN(3)
-	PrintCombN(9)
+func PrintCombN(n int) {
+	var count int = 0
+	for i := 0; i <= 9; i++ {
+		if n > 1 {
+			AddFor(n-1, i, IntToString(i), &count)
+		} else {
+			if count > 0 {
+				z01.PrintRune(',')
+				z01.PrintRune(' ')
+			}
+			z01.PrintRune(rune(i) + 48)
+			count++
+		}
+	}
+	z01.PrintRune('\n')
 }
