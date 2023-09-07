@@ -10,7 +10,7 @@ func AddFor(n int, prev int, result string, count *int) {
 					z01.PrintRune(',')
 					z01.PrintRune(' ')
 				}
-				if len(result) <= 1 {
+				if len(result) <= 0 {
 					z01.PrintRune('0')
 				}
 				for _, r := range result {
