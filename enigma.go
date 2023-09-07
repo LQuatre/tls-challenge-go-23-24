@@ -5,8 +5,8 @@ func Enigma(a ***int, b *int, c *******int, d ****int) {
 	valb := *b
 	valc := *******c
 	vald := ****d
-	***a = valc
-	*******c = vald
-	****d = valb
-	*b = vala
+	***a = valb
+	*******c = vala
+	****d = valc
+	*b = vald
 }
