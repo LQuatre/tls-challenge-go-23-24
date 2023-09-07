@@ -27,7 +27,7 @@ func PrintCombN(n int) {
 	var startNumb int = n
 	for i := 0; i < 10; i++ {
 		if n > 1 {
-			AddFor(n-1, i, IntToString(i), &count, startNumb)
+			AddFor(n-1, i, string(i), &count, startNumb)
 		} else {
 			if count > 0 {
 				z01.PrintRune(',')
