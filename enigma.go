@@ -5,10 +5,8 @@ func Enigma(a ***int, b *int, c *******int, d ****int) {
 	f := *b
 	g := *******c
 	h := ****d
-
 	***a = g
 	*******c = e
 	****d = f
 	*b = h
-
 }
