@@ -1,8 +1,8 @@
-package piscine
+package main
 
 import "github.com/01-edu/z01"
 
-func AddFor(n int, prev int, result string, count *int) {
+func AddFor(n int, prev int, result string, count *int, startNumb int) {
 	for i := 0; i < 10; i++ {
 		if prev < i {
 			if n == 1 {
@@ -10,7 +10,7 @@ func AddFor(n int, prev int, result string, count *int) {
 					z01.PrintRune(',')
 					z01.PrintRune(' ')
 				}
-				if len(result) <= 0 {
+				if (len(result + string(i+48))) < startNumb {
 					z01.PrintRune('0')
 				}
 				for _, r := range result {
@@ -19,7 +19,7 @@ func AddFor(n int, prev int, result string, count *int) {
 				z01.PrintRune(rune(i) + 48)
 				*count++
 			} else {
-				AddFor(n-1, i, result+string(i+48), count)
+				AddFor(n-1, i, result+string(i+48), count, startNumb)
 			}
 		}
 	}
@@ -27,9 +27,10 @@ func AddFor(n int, prev int, result string, count *int) {
 
 func PrintCombN(n int) {
 	var count int = 0
+	var startNumb int = n
 	for i := 0; i < 10; i++ {
 		if n > 1 {
-			AddFor(n-1, i, IntToString(i), &count)
+			AddFor(n-1, i, IntToString(i), &count, startNumb)
 		} else {
 			if count > 0 {
 				z01.PrintRune(',')
