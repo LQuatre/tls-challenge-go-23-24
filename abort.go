@@ -1,8 +1,8 @@
 package piscine
 
 func Abort(a, b, c, d, e int) int {
-	var args = []int{a, b, c, d, e}
-	var len = 5
+	args := []int{a, b, c, d, e}
+	len := 5
 	var temp int
 	for i := 0; i < len; i++ {
 		for j := 0; j < len-1; j++ {
