@@ -1,52 +1,46 @@
 package piscine
 
+func charToInt(ch rune) int {
+	var nm int
+	for i := '0'; i < ch; i++ {
+		nm++
+	}
+	return nm
+}
+
+func containsInt(ch rune) bool {
+	for i := '0'; i <= '9'; i++ {
+		if ch == i {
+			return true
+		}
+	}
+	return false
+}
+
 func Atoi(s string) int {
-	return convert(clean(s))
-}
-
-func clean(s string) (sign int, abs []rune) {
-	a := []rune(s)
-	a = trimspace(a)
-	if s == "" {
-		return
-	}
-	switch a[0] {
-	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-		sign, abs = 1, a
-	case '+':
-		sign, abs = 1, a[1:]
-	case '-':
-		sign, abs = -1, a[1:]
-	default:
-		return
+	if StrLen(s) == 0 {
+		return 0
 	}
 
-	for i, b := range abs {
-		if b < '0' || '9' < b {
-			abs = abs[:i]
-			break
+	s0 := s
+	if s[0] == '-' || s[0] == '+' {
+		s = s[1:]
+		if StrLen(s) < 1 {
+			return 0
 		}
 	}
-	return
-}
 
-func convert(sign int, absStr []rune) int {
-	abs := 0
-	for _, b := range absStr {
-		abs = abs*10 + int(b-'0')
-	}
-	return sign * abs
-}
+	nm := 0
 
-func trimspace(a []rune) []rune {
-	for i := 0; i <= len(a)-1; i++ {
-		if a[i] == '-' && i != 0 || a[i] == '+' && i != 0 {
-			i = '0'
-			return []rune{'0'}
+	for _, ch := range s {
+		if !containsInt(ch) {
+			return 0
 		}
-		if a[i] == ' ' || a[i] == '.' || a[i] >= 'a' {
-			return []rune{'0'}
-		}
+		nm = nm*10 + charToInt(ch)
 	}
-	return a
+
+	if s0[0] == '-' {
+		nm *= -1
+	}
+	return nm
 }
