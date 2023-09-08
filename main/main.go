@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-	steps := piscine.CollatzCountdown(12)
-	fmt.Println(steps)
+	fmt.Println(piscine.BasicAtoi("12345"))
+	fmt.Println(piscine.BasicAtoi("0000000012345"))
+	fmt.Println(piscine.BasicAtoi("000000"))
 }
