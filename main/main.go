@@ -6,5 +6,6 @@ import (
 )
 
 func main() {
-	fmt.Println(piscine.ActiveBits(2000))
+	arg := 4
+	fmt.Println(piscine.IterativeFactorial(arg))
 }
