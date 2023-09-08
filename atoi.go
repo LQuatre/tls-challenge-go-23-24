@@ -1,16 +1,16 @@
 package piscine
 
-func charToInt(ch rune) int {
-	var nm int
-	for i := '0'; i < ch; i++ {
-		nm++
+func charToInt(r rune) int {
+	var n int
+	for i := '0'; i < r; i++ {
+		n++
 	}
-	return nm
+	return n
 }
 
-func containsInt(ch rune) bool {
+func containsInt(r rune) bool {
 	for i := '0'; i <= '9'; i++ {
-		if ch == i {
+		if r == i {
 			return true
 		}
 	}
@@ -21,26 +21,22 @@ func Atoi(s string) int {
 	if StrLen(s) == 0 {
 		return 0
 	}
-
-	s0 := s
+	arrayStr := s
 	if s[0] == '-' || s[0] == '+' {
 		s = s[1:]
 		if StrLen(s) < 1 {
 			return 0
 		}
 	}
-
-	nm := 0
-
-	for _, ch := range s {
-		if !containsInt(ch) {
+	n := 0
+	for _, r := range s {
+		if !containsInt(r) {
 			return 0
 		}
-		nm = nm*10 + charToInt(ch)
+		n = n*10 + charToInt(r)
 	}
-
-	if s0[0] == '-' {
-		nm *= -1
+	if arrayStr[0] == '-' {
+		n *= -1
 	}
-	return nm
+	return n
 }
