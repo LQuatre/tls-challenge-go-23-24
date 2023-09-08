@@ -1,10 +1,17 @@
 package main
 
-import "github.com/01-edu/z01"
+import (
+	"fmt"
+	"piscine"
+)
 
 func main() {
-	for letter := 97; letter < 123; letter++ {
-		z01.PrintRune(rune(letter))
-	}
-	z01.PrintRune('\n')
+	fmt.Println(piscine.Atoi("12345"))
+	fmt.Println(piscine.Atoi("0000000012345"))
+	fmt.Println(piscine.Atoi("012 345"))
+	fmt.Println(piscine.Atoi("Hello World!"))
+	fmt.Println(piscine.Atoi("+1234"))
+	fmt.Println(piscine.Atoi("-1234"))
+	fmt.Println(piscine.Atoi("++1234"))
+	fmt.Println(piscine.Atoi("--1234"))
 }
