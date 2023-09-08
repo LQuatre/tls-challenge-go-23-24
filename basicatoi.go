@@ -1,11 +1,16 @@
 package piscine
 
-import "strconv"
-
 func BasicAtoi(s string) int {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		return 0
+	arrayStr := []rune(s)
+	n := len(s)
+	num := 0
+	for i := 0; i < n; i++ {
+		if arrayStr[i] < '0' || arrayStr[i] > '9' {
+			return num
+		} else {
+			num *= 10
+			num += int(arrayStr[i]) - '0'
+		}
 	}
-	return i
+	return num
 }
