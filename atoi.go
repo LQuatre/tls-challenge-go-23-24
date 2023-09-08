@@ -6,15 +6,7 @@ func Atoi(s string) int {
 
 func clean(s string) (sign int, abs []rune) {
 	a := []rune(s)
-	for i := 0; i <= len(a)-1; i++ {
-		if a[i] == '-' && i != 0 || a[i] == '+' && i != 0 {
-			i = '0'
-			a = []rune{'0'}
-		}
-		if a[i] == ' ' || a[i] == '.' || a[i] >= 'a' {
-			a = []rune{'0'}
-		}
-	}
+	a = trimspace(a)
 	if s == "" {
 		return
 	}
@@ -42,7 +34,19 @@ func convert(sign int, absStr []rune) int {
 	abs := 0
 	for _, b := range absStr {
 		abs = abs*10 + int(b-'0')
-
 	}
 	return sign * abs
+}
+
+func trimspace(a []rune) []rune {
+	for i := 0; i <= len(a)-1; i++ {
+		if a[i] == '-' && i != 0 || a[i] == '+' && i != 0 {
+			i = '0'
+			return []rune{'0'}
+		}
+		if a[i] == ' ' || a[i] == '.' || a[i] >= 'a' {
+			return []rune{'0'}
+		}
+	}
+	return a
 }
