@@ -21,7 +21,7 @@ func resolver(n int) {
 		for i := 0; i < nEnd; i++ {
 			z01.PrintRune(rune(position[i] + 1))
 		}
-		z01.PrintRune('\n')
+		z01.PrintRune(rune('\n'))
 	} else {
 		for i := 0; i < nEnd; i++ {
 			if isInDanger(n, i) {
