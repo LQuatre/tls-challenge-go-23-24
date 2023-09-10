@@ -31,6 +31,7 @@ func resolverPuzzle(n int) {
 		}
 	}
 }
+
 func EightQueens() {
 	resolverPuzzle(0)
 }
