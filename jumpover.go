@@ -11,7 +11,6 @@ func JumpOver(str string) string {
 		z01.PrintRune(10)
 	}
 	var result string
-	// jump two str characters and add the third to result
 	for i := 2; i < StrLen(str); i += 3 {
 		result += string(str[i])
 	}
