@@ -19,7 +19,7 @@ func isInDanger(queennumber, rowposition int) bool {
 func resolver(n int) {
 	if n == nEnd {
 		for i := 0; i < nEnd; i++ {
-			z01.PrintRune(rune(position[i] + '1'))
+			z01.PrintRune(rune(position[i] + 1))
 		}
 		z01.PrintRune('\n')
 	} else {
