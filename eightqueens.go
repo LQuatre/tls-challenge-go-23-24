@@ -1,6 +1,6 @@
 package piscine
 
-import "fmt"
+import "github.com/01-edu/z01"
 
 const nEnd = 8
 
@@ -16,22 +16,22 @@ func isInDanger(queennumber, rowposition int) bool {
 	return true
 }
 
-func resolverPuzzle(n int) {
+func resolver(n int) {
 	if n == nEnd {
 		for i := 0; i < nEnd; i++ {
-			fmt.Print(position[i] + 1)
+			z01.PrintRune(rune(position[i] + '1'))
 		}
-		fmt.Print("\n")
+		z01.PrintRune('\n')
 	} else {
 		for i := 0; i < nEnd; i++ {
 			if isInDanger(n, i) {
 				position[n] = i
-				resolverPuzzle(n + 1)
+				resolver(n + 1)
 			}
 		}
 	}
 }
 
 func EightQueens() {
-	resolverPuzzle(0)
+	resolver(0)
 }
