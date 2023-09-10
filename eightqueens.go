@@ -1,7 +1,5 @@
 package piscine
 
-import "github.com/01-edu/z01"
-
 const nEnd = 8
 
 var position = [nEnd]int{}
@@ -19,9 +17,9 @@ func isInDanger(queennumber, rowposition int) bool {
 func resolver(n int) {
 	if n == nEnd {
 		for i := 0; i < nEnd; i++ {
-			z01.PrintRune(rune(position[i] + 1))
+			PrintNbr(position[i] + 1)
 		}
-		z01.PrintRune('\n')
+		PrintStr("\n")
 	} else {
 		for i := 0; i < nEnd; i++ {
 			if isInDanger(n, i) {
