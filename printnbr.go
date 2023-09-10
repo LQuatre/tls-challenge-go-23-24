@@ -15,7 +15,7 @@ func UintToString(n uint) string {
 
 func IntToString(n int) string {
 	if n < 0 {
-		z01.PrintRune('-')
+		z01.PrintRune(45)
 		return UintToString(uint(-n))
 	}
 	return UintToString(uint(n))
@@ -23,7 +23,7 @@ func IntToString(n int) string {
 
 func PrintNbr(n int) {
 	if n == 0 {
-		z01.PrintRune('0')
+		z01.PrintRune(48)
 	}
 	s := IntToString(n)
 	PrintStr(s)
