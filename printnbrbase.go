@@ -29,20 +29,11 @@ func PrintNbrBase(nbr int, str string) {
 	} else {
 		if nbr < 0 {
 			z01.PrintRune('-')
-			nbr *= -1
+			nbr = -nbr
 		}
-		i := 0
-		nan := ""
-		for nbr >= len(str) {
-			if nbr >= len(str) {
-				nan += string(str[nbr%len(str)])
-				nbr = nbr / len(str)
-				i++
-			}
+		if nbr >= len(str) {
+			PrintNbrBase(nbr/len(str), str)
 		}
-		nan += string(str[nbr])
-		for j := i; j >= 0; j-- {
-			z01.PrintRune(rune(nan[j]))
-		}
+		z01.PrintRune(rune(str[nbr%len(str)]))
 	}
 }
