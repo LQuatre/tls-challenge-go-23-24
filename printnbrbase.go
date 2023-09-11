@@ -29,7 +29,7 @@ func PrintNbrBase(nbr int, str string) {
 	} else {
 		if nbr < 0 {
 			z01.PrintRune('-')
-			nbr *= -1
+			nbr = -nbr
 		}
 		i := 0
 		nan := ""
@@ -39,9 +39,6 @@ func PrintNbrBase(nbr int, str string) {
 				nbr = nbr / len(str)
 				i++
 			}
-		}
-		if nbr%len(str) < 0 {
-			nbr *= -1
 		}
 		nan += string(str[nbr%len(str)])
 		PrintStr(StrRev(nan))
