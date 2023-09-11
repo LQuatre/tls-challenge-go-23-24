@@ -37,7 +37,17 @@ func ContainsNotValidChar(str string) bool {
 }
 
 func PrintNbrBase(nbr int, base string) {
-	if !checkBase(base) || !IsUnique(base) || ContainsNotValidChar(base) {
+	if !checkBase(base) {
+		z01.PrintRune('N')
+		z01.PrintRune('V')
+		return
+	}
+	if !IsUnique(base) {
+		z01.PrintRune('N')
+		z01.PrintRune('V')
+		return
+	}
+	if ContainsNotValidChar(base) {
 		z01.PrintRune('N')
 		z01.PrintRune('V')
 		return
