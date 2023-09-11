@@ -32,8 +32,6 @@ func PrintNbrBase(nbr int, str string) {
 	}
 	if indx == 1 || len(str) < 2 {
 		PrintStr("NV")
-	} else if 2147483647 < nbr || -2147483648 > nbr {
-		PrintStr("NV")
 	} else {
 		if nbr < 0 {
 			z01.PrintRune('-')
