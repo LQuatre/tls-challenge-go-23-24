@@ -1,11 +1,11 @@
 package piscine
 
 func Compare(a, b string) int {
-	if len(a) < len(b) {
+	if a == b {
+		return 0
+	} else if a > b {
 		return 1
-	}
-	if len(a) > len(b) {
+	} else {
 		return -1
 	}
-	return 0
 }
