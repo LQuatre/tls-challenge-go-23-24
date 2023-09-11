@@ -1,9 +1,10 @@
 package main
 
-import "piscine"
+import (
+	"fmt"
+	"piscine"
+)
 
 func main() {
-	piscine.PrintNbrInOrder(321)
-	piscine.PrintNbrInOrder(0)
-	piscine.PrintNbrInOrder(321)
+	fmt.Println(piscine.Capitalize("Hello! How are you? How+are+things+4you?"))
 }
