@@ -1,13 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"github.com/01-edu/z01"
+
 	"piscine"
 )
 
 func main() {
-	fmt.Print(piscine.JumpOver("1010101010"))
-	fmt.Print(piscine.JumpOver(""))
-	fmt.Print(piscine.JumpOver("t w e l v e"))
-	fmt.Print(piscine.JumpOver("12"))
+	z01.PrintRune(piscine.NRune("Hello!", 3))
+	z01.PrintRune(piscine.NRune("Salut!", 2))
+	z01.PrintRune(piscine.NRune("Bye!", -1))
+	z01.PrintRune(piscine.NRune("Bye!", 5))
+	z01.PrintRune(piscine.NRune("Ola!", 4))
+	z01.PrintRune('\n')
 }
