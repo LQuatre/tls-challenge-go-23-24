@@ -40,9 +40,6 @@ func PrintNbrBase(nbr int, str string) {
 				i++
 			}
 		}
-		if nbr%len(str) < 0 {
-			nbr *= -1
-		}
 		nan += string(str[nbr%len(str)])
 		PrintStr(StrRev(nan))
 	}
