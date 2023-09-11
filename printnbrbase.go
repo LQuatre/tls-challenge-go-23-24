@@ -40,11 +40,9 @@ func PrintNbrBase(nbr int, str string) {
 				i++
 			}
 		}
-		if nbr < len(str) {
-			PrintStr("NV")
-			return
+		nan += string(str[nbr])
+		for j := i; j >= 0; j-- {
+			z01.PrintRune(rune(nan[j]))
 		}
-		nan += string(str[nbr%len(str)])
-		PrintStr(StrRev(nan))
 	}
 }
