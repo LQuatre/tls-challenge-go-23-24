@@ -2,12 +2,6 @@ package piscine
 
 import "github.com/01-edu/z01"
 
-// Validity rules for a base :
-
-// A base must contain at least 2 characters.
-// Each character of a base must be unique.
-// A base should not contain + or - characters.
-
 func checkBase(base string) bool {
 	if len(base) < 2 {
 		return false
@@ -70,5 +64,4 @@ func PrintNbrBase(nbr int, base string) {
 		PrintNbrBase(nbr/len(base), base)
 	}
 	z01.PrintRune(rune(base[nbr%len(base)]))
-
 }
