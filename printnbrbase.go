@@ -2,14 +2,6 @@ package piscine
 
 import "github.com/01-edu/z01"
 
-func Reverse(s string) string {
-	var reverse string
-	for i := len(s) - 1; i >= 0; i-- {
-		reverse += string(s[i])
-	}
-	return reverse
-}
-
 func Count(str, substr string) int {
 	count := 0
 	for i := 0; i < len(str); i++ {
@@ -48,7 +40,7 @@ func PrintNbrBase(nbr int, str string) {
 				i++
 			}
 		}
-		nan += string(str[nbr])
-		PrintStr(Reverse(nan))
+		nan += string(str[nbr%len(str)])
+		PrintStr(StrRev(nan))
 	}
 }
