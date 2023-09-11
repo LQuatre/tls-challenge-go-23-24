@@ -18,4 +18,9 @@ func main() {
 	piscine.PrintNbrBase(125, "aa")
 	z01.PrintRune('\n')
 	piscine.PrintNbrBase(125, "-ab")
+	z01.PrintRune('\n')
+	piscine.PrintNbrBase(-9223372036854775808, "0123456789")
+	z01.PrintRune('\n')
+	piscine.PrintNbrBase(-9223372036854775808, "choumi")
+
 }

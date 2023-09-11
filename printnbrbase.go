@@ -24,12 +24,12 @@ func PrintNbrBase(nbr int, str string) {
 	}
 	if indx == 1 || len(str) < 2 {
 		PrintStr("NV")
-	} else if -9223372036854775808 <= nbr && nbr >= 9223372036854775807 {
+	} else if -9223372036854775808 >= nbr || nbr >= 9223372036854775807 {
 		PrintStr("NV")
 	} else {
 		if nbr < 0 {
 			z01.PrintRune('-')
-			nbr = -nbr
+			nbr *= -1
 		}
 		if nbr >= len(str) {
 			PrintNbrBase(nbr/len(str), str)
