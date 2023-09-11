@@ -1,39 +1,48 @@
 package piscine
 
-import "github.com/01-edu/z01"
+import (
+	"github.com/01-edu/z01"
+)
 
-func Count(str, substr string) int {
-	count := 0
-	for i := 0; i < len(str); i++ {
-		if str[i] == substr[0] {
-			if str[i:i+len(substr)] == substr {
-				count++
+func PrintNbrBase(nbr int, base string) {
+	result := ""
+	baseLength := 0
+	for _, digit := range base {
+		if digit == digit {
+			baseLength++
+		}
+	}
+	maxPower := baseLength
+	if nbr < 0 {
+		result = "-"
+		maxPower *= -1
+	}
+	if baseLength > 1 {
+		for nbr/maxPower >= baseLength {
+			maxPower *= baseLength
+		}
+		for maxPower != 0 {
+			result = result + string(base[nbr/maxPower])
+			nbr = nbr - nbr/maxPower*maxPower
+			maxPower /= baseLength
+		}
+		seen := map[rune]bool{}
+		for _, digit := range base {
+			if digit == '+' || digit == '-' {
+				result = "NV"
+				break
+			}
+			if seen[digit] == false {
+				seen[digit] = true
+			} else {
+				result = "NV"
+				break
 			}
 		}
-	}
-	return count
-}
-
-func PrintNbrBase(nbr int, str string) {
-	indx := 0
-	for _, res := range str {
-		if string(res) == "-" || string(res) == "+" || Count(str, string(res)) > 1 {
-			indx = 1
-			break
-		}
-	}
-	if indx == 1 || len(str) < 2 {
-		PrintStr("NV")
-	} else if -9223372036854775808 >= nbr || nbr >= 9223372036854775807 {
-		PrintStr("NV")
 	} else {
-		if nbr < 0 {
-			z01.PrintRune('-')
-			nbr *= -1
-		}
-		if nbr >= len(str) {
-			PrintNbrBase(nbr/len(str), str)
-		}
-		z01.PrintRune(rune(str[nbr%len(str)]))
+		result = "NV"
+	}
+	for _, digit := range result {
+		z01.PrintRune(digit)
 	}
 }
