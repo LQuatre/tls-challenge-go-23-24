@@ -8,6 +8,9 @@ func Index(s string, toFind string) int {
 	}
 	for i := 0; i < lenS; i++ {
 		if s[i] == toFind[0] {
+			if i+lenToFind > lenS {
+				return -1
+			}
 			if toFind == s[i:i+lenToFind] {
 				return i
 			}
