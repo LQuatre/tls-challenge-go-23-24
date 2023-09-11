@@ -17,4 +17,5 @@ func main() {
 	z01.PrintRune('\n')
 	piscine.PrintNbrBase(125, "aa")
 	z01.PrintRune('\n')
+	piscine.PrintNbrBase(125, "-ab")
 }
