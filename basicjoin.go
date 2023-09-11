@@ -1,8 +1,8 @@
 package piscine
 
-func BasicJoin(strs []string) string {
+func BasicJoin(elems []string) string {
 	result := ""
-	for _, r := range strs {
+	for _, r := range elems {
 		result += r
 	}
 	return result
