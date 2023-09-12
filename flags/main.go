@@ -36,7 +36,12 @@ import (
 //          This flag will behave like a boolean, if it is called it will order the argument.
 
 func Help() {
-	fmt.Println("--insert\n   -i\n          This flag inserts the string into the string passed as argument.\n--order\n   -o\n          This flag will behave like a boolean, if it is called it will order the argument.\n")
+	fmt.Println("--insert\n")
+	fmt.Println("  -i\n")
+	fmt.Println("	   This flag inserts the string into the string passed as argument.\n")
+	fmt.Println("--order\n")
+	fmt.Println("  -o\n")
+	fmt.Println("	   This flag will behave like a boolean, if it is called it will order the argument	.`\n")
 }
 
 func Contains(s, substr string) bool {
