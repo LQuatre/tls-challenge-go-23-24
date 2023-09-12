@@ -6,42 +6,53 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func BasicAtoi2(s string) int {
-	arrayStr := []rune(s)
-	n := len(s)
-	num := 0
-	for i := 0; i < n; i++ {
-		if arrayStr[i] < '0' || arrayStr[i] > '9' {
-			return 0
-		} else {
-			num *= 10
-			num += int(arrayStr[i]) - '0'
+func main() {
+	if len(os.Args) > 1 {
+		arguments := os.Args[1:]
+		arrayNumbers := []string{}
+		arrayLetters := []rune{}
+		for i := 1; i < 27; i++ {
+			if i < 10 {
+				arrayNumbers = append(arrayNumbers, string(rune(i+'0')))
+			}
+			if i >= 10 {
+				mod := i % 10
+				decimal := i / 10
+				arrayNumbers = append(arrayNumbers, (string(rune(decimal+'0')) + string(rune(mod+'0'))))
+			}
 		}
+		if arguments[0] != "--upper" {
+			for i := 'a'; i <= 'z'; i++ {
+				arrayLetters = append(arrayLetters, i)
+			}
+		}
+		if arguments[0] == "--upper" {
+			for i := 'A'; i <= 'Z'; i++ {
+				arrayLetters = append(arrayLetters, i)
+			}
+		}
+		for i := 0; i < len(arguments); i++ {
+			if arguments[i] != "--upper" {
+				if inArray(arguments[i], arrayNumbers) {
+					for index, value := range arrayNumbers {
+						if arguments[i] == value {
+							z01.PrintRune(arrayLetters[index])
+						}
+					}
+				} else {
+					z01.PrintRune(' ')
+				}
+			}
+		}
+		z01.PrintRune('\n')
 	}
-	return num
 }
 
-func main() {
-	Args := os.Args
-	table := []int{}
-	for i := 1; i < len(Args); i++ {
-		table = append(table, BasicAtoi2(Args[i]))
-	}
-	upper := false
-	if Args[1] == "--upper" {
-		upper = true
-	}
-	if upper == false {
-		for i := 0; i < len(table); i++ {
-			table[i] = table[i] + 96
-		}
-	} else {
-		for i := 1; i < len(table); i++ {
-			table[i] = table[i] + 64
+func inArray(a string, b []string) bool {
+	for _, value := range b {
+		if a == value {
+			return true
 		}
 	}
-	table = append(table, '\n')
-	for i := 0; i < len(table); i++ {
-		z01.PrintRune(rune(table[i]))
-	}
+	return false
 }
