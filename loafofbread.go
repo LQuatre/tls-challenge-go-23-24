@@ -16,7 +16,7 @@ func LoafOfBread(str string) string {
 			continue
 		}
 		result += string(str[i])
-		if i%5 == 4 {
+		if i%4 == 3 {
 			result += " "
 			i++
 		}
