@@ -15,6 +15,9 @@ func main() {
 		}
 	}
 	for _, arg := range Args {
+		if arg == "--upper" {
+			continue
+		}
 		numv := 0
 		for _, v := range arg {
 			numv = numv*10 + int(v-'0')
