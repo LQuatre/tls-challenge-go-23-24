@@ -6,7 +6,7 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func Swap(a *int, b *int) {
+func Swap(a *rune, b *rune) {
 	ValA := *a
 	ValB := *b
 	*a = ValB
@@ -14,37 +14,27 @@ func Swap(a *int, b *int) {
 }
 
 func main() {
-	// IN : 1 a 2 A 3 b 4 C
-	// OUT :
-	// 1
-	// 2
-	// 3
-	// 4
-	// A
-	// C
-	// a
-	// b
-
-	// sortparams/main.go
-
 	Args := os.Args
-	table := []int{}
-	for i, v := range Args {
-		if i > 0 {
-			table = append(table, int(v[0]))
-		}
+	table := []string{}
+	for i := 1; i < len(Args); i++ {
+		table = append(table, Args[i])
 	}
-	n := len(table)
+	tableRune := [][]rune{}
+	for i := 0; i < len(table); i++ {
+		tableRune = append(tableRune, []rune(table[i]))
+	}
+	n := len(tableRune)
 	for i := 0; i < n; i++ {
 		for j := 0; j < n-1; j++ {
-			if table[j] > table[j+1] {
-				Swap(&table[j], &table[j+1])
+			if tableRune[j][0] > tableRune[j+1][0] {
+				Swap(&tableRune[j][0], &tableRune[j+1][0])
 			}
 		}
 	}
-	for _, v := range table {
-		for _, c := range string(v) {
-			z01.PrintRune(c)
+	for i := 0; i < len(tableRune); i++ {
+		for j := 0; j < len(tableRune[i]); j++ {
+			z01.PrintRune(tableRune[i][j])
 		}
+		z01.PrintRune('\n')
 	}
 }
