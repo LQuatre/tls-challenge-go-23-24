@@ -2,6 +2,8 @@ package main
 
 import (
 	"os"
+
+	"github.com/01-edu/z01"
 )
 
 func BasicAtoi2(s string) int {
@@ -25,7 +27,6 @@ func main() {
 	for i := 1; i < len(Args); i++ {
 		table = append(table, BasicAtoi2(Args[i]))
 	}
-	// flags "--upper"
 	upper := false
 	if Args[1] == "--upper" {
 		upper = true
@@ -35,12 +36,12 @@ func main() {
 			table[i] = table[i] + 96
 		}
 	} else {
-		for i := 0; i < len(table); i++ {
+		for i := 1; i < len(table); i++ {
 			table[i] = table[i] + 64
 		}
 	}
+	table = append(table, '\n')
 	for i := 0; i < len(table); i++ {
-		print(string(table[i]))
+		z01.PrintRune(rune(table[i]))
 	}
-	println()
 }
