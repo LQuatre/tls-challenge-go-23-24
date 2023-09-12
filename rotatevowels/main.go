@@ -8,6 +8,18 @@ import (
 
 // rotateVowels is a function that rotates vowels in a string
 
+func Swap(vow []rune) {
+	len := 0
+	for i := range vow {
+		len = i + 1
+	}
+	for i, j := 0, len-1; i < j; i, j = i+1, j-1 {
+		temp := vow[i]
+		vow[i] = vow[j]
+		vow[j] = temp
+	}
+}
+
 func main() {
 	argruments := os.Args[1:]
 	length := 0
@@ -37,7 +49,7 @@ func main() {
 				vow = append(vow, runes[i])
 			}
 		}
-		swap(vow)
+		Swap(vow)
 
 		for i := range pos {
 			runes[pos[i]] = vow[i]
@@ -49,16 +61,4 @@ func main() {
 
 	}
 	z01.PrintRune('\n')
-}
-
-func swap(vow []rune) {
-	len := 0
-	for i := range vow {
-		len = i + 1
-	}
-	for i, j := 0, len-1; i < j; i, j = i+1, j-1 {
-		temp := vow[i]
-		vow[i] = vow[j]
-		vow[j] = temp
-	}
 }
