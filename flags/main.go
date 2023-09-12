@@ -5,43 +5,13 @@ import (
 	"os"
 )
 
-// $ go run . --insert=4321 --order asdad
-// 1234aadds
-// $ go run . --insert=4321 asdad
-// asdad4321
-// $ go run . asdad
-// asdad
-// $ go run . --order 43a21
-// 1234a
-// $ go run .
-// --insert
-//   -i
-//          This flag inserts the string into the string passed as argument.
-// --order
-//   -o
-//          This flag will behave like a boolean, if it is called it will order the argument.
-// $ go run . -h
-// --insert
-//   -i
-//          This flag inserts the string into the string passed as argument.
-// --order
-//   -o
-//          This flag will behave like a boolean, if it is called it will order the argument.
-// $ go run . --help
-// --insert
-//   -i
-//          This flag inserts the string into the string passed as argument.
-// --order
-//   -o
-//          This flag will behave like a boolean, if it is called it will order the argument.
-
 func Help() {
 	fmt.Println("--insert")
 	fmt.Println("  -i")
-	fmt.Println("         This flag inserts the string into the string passed as argument.")
+	fmt.Println("	 This flag inserts the string into the string passed as argument.")
 	fmt.Println("--order")
 	fmt.Println("  -o")
-	fmt.Println("         This flag will behave like a boolean, if it is called it will order the argument.")
+	fmt.Println("	 This flag will behave like a boolean, if it is called it will order the argument.")
 }
 
 func Contains(s, substr string) bool {
