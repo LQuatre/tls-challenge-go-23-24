@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	a := []int{23, 123, 1, 11, 55, 93}
-	max := piscine.Max(a)
-	fmt.Println(max)
+	fmt.Println(piscine.RockAndRoll(4))
+	fmt.Println(piscine.RockAndRoll(9))
+	fmt.Println(piscine.RockAndRoll(6))
 }
