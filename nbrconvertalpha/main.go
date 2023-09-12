@@ -45,4 +45,5 @@ func main() {
 	for i := 0; i < len(table); i++ {
 		z01.PrintRune(rune(table[i]))
 	}
+	z01.PrintRune('\n')
 }
