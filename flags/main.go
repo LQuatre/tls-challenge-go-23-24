@@ -94,7 +94,6 @@ func main() {
 	for _, v := range Args {
 		if Contains(v, "--help") || Contains(v, "-h") {
 			Help()
-			return
 		} else if Contains(v, "--insert=") {
 			for _, v := range v[9:] {
 				Insert += string(v)
