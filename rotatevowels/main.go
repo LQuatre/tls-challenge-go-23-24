@@ -9,20 +9,15 @@ import (
 // rotateVowels is a function that rotates vowels in a string
 
 func Swap(vow []rune) {
-	len := 0
-	for i := range vow {
-		len = i + 1
-	}
-	for i, j := 0, len-1; i < j; i, j = i+1, j-1 {
-		temp := vow[i]
-		vow[i] = vow[j]
-		vow[j] = temp
+	for i := 0; i < len(vow)/2; i++ {
+		vow[i], vow[len(vow)-i-1] = vow[len(vow)-i-1], vow[i]
 	}
 }
 
 func main() {
 	argruments := os.Args[1:]
 	length := 0
+
 	for i := range argruments {
 		length = i + 1
 	}
@@ -44,21 +39,20 @@ func main() {
 		var vow []rune
 
 		for i, r := range runes {
-			if r == 'A' || r == 'E' || r == 'I' || r == 'O' || r == 'U' || r == 'a' || r == 'e' || r == 'i' || r == 'o' || r == 'u' {
+			if r == 'a' || r == 'e' || r == 'i' || r == 'o' || r == 'u' || r == 'A' || r == 'E' || r == 'I' || r == 'O' || r == 'U' {
 				pos = append(pos, i)
-				vow = append(vow, runes[i])
+				vow = append(vow, r)
 			}
 		}
 		Swap(vow)
 
-		for i := range pos {
-			runes[pos[i]] = vow[i]
+		for i, v := range pos {
+			runes[v] = vow[i]
 		}
 
 		for _, r := range runes {
 			z01.PrintRune(r)
 		}
-
 	}
 	z01.PrintRune('\n')
 }
