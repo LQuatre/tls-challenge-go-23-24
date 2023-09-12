@@ -6,9 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(piscine.AtoiBase("125", "0123456789"))
-	fmt.Println(piscine.AtoiBase("1111101", "01"))
-	fmt.Println(piscine.AtoiBase("7D", "0123456789ABCDEF"))
-	fmt.Println(piscine.AtoiBase("uoi", "choumi"))
-	fmt.Println(piscine.AtoiBase("bbbbbab", "-ab"))
+	a := []int{23, 123, 1, 11, 55, 93}
+	max := piscine.Max(a)
+	fmt.Println(max)
 }
