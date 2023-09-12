@@ -2,9 +2,13 @@ package main
 
 import (
 	"os"
-	"piscine"
+
+	"github.com/01-edu/z01"
 )
 
 func main() {
-	piscine.PrintStr(os.Args[0])
+	s := os.Args[0]
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
 }
