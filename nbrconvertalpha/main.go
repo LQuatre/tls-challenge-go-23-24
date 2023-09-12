@@ -14,6 +14,9 @@ func main() {
 			upper = true
 		}
 	}
+	if len(Args) == 0 || len(Args) == 1 && Args[0] == "--upper" {
+		return
+	}
 	for _, arg := range Args {
 		if arg == "--upper" {
 			continue
