@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"os"
+	"piscine"
 )
 
 func main() {
-	// Print the program name
-	fmt.Println(os.Args[0])
+	piscine.PrintStr(os.Args[0])
 }
