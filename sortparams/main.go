@@ -6,7 +6,7 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func Swap(a *rune, b *rune) {
+func Swap(a *[]rune, b *[]rune) {
 	ValA := *a
 	ValB := *b
 	*a = ValB
@@ -27,7 +27,7 @@ func main() {
 	for i := 0; i < n; i++ {
 		for j := 0; j < n-1; j++ {
 			if tableRune[j][0] > tableRune[j+1][0] {
-				Swap(&tableRune[j][0], &tableRune[j+1][0])
+				Swap(&tableRune[j], &tableRune[j+1])
 			}
 		}
 	}
