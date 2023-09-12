@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(piscine.RockAndRoll(4))
-	fmt.Println(piscine.RockAndRoll(9))
-	fmt.Println(piscine.RockAndRoll(6))
+	fmt.Print(piscine.LoafOfBread("deliciousbread"))
+	fmt.Print(piscine.LoafOfBread("This is a loaf of bread"))
+	fmt.Print(piscine.LoafOfBread("loaf"))
 }
