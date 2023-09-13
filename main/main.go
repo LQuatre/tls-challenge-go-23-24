@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	result := piscine.ConvertBase("101011", "01", "0123456789")
+	result := piscine.ConvertBase("n00nn0o1", "Zone01", "CHOUMIisDAcat!")
 	fmt.Println(result)
 }
