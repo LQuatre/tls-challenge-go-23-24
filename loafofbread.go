@@ -13,13 +13,13 @@ func LoafOfBread(str string) string {
 		return "Invalid Output\n"
 	}
 	for i := 0; i < len(str); i++ {
-		if str[i] == ' ' {
-			continue
-		}
 		if count == 5 {
 			result += " "
 			count = 0
 		} else {
+			if str[i] == ' ' {
+				continue
+			}
 			result += string(str[i])
 			count++
 		}
