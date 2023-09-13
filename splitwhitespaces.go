@@ -31,6 +31,7 @@ func SplitWhiteSpaces2(s string) []string {
 			for j := i + 1; j < len(s); j++ {
 				if s[j] == ' ' || s[j] == '\n' || s[j] == '\t' {
 					temp += string(s[j])
+					AddTemp(&result, &temp)
 					i++
 				} else {
 					break
