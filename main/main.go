@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	s := "HelloHAhowHAareHAyou?"
-	fmt.Printf("%#v\n", piscine.Split(s, "HA"))
+	result := piscine.ConvertBase("101011", "01", "0123456789")
+	fmt.Println(result)
 }
