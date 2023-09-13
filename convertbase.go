@@ -1,9 +1,5 @@
 package piscine
 
-import (
-	"math"
-)
-
 func CreateDigitMap(base string) map[rune]int {
 	digitMap := make(map[rune]int)
 	for i, digit := range base {
@@ -12,22 +8,37 @@ func CreateDigitMap(base string) map[rune]int {
 	return digitMap
 }
 
+func Pow(a, b float64) float64 {
+	if b == 0 {
+		return 1
+	}
+	return a * Pow(a, b-1)
+}
+
+func baseFromInt(nbr int, baseFrom string, digitMap map[rune]int) string {
+	result := ""
+	for nbr > 0 {
+		result = string(baseFrom[nbr%len(baseFrom)]) + result
+		nbr /= len(baseFrom)
+	}
+	return result
+}
+
+func baseToInt(nbr string, baseTo string, digitMap map[rune]int) int {
+	baseToInt := len(baseTo)
+	nbrInt := 0
+	for i, digit := range nbr {
+		nbrInt += digitMap[digit] * int(Pow(float64(baseToInt), float64(len(nbr)-i-1)))
+	}
+	return nbrInt
+}
+
 func ConvertBase(nbr, baseFrom, baseTo string) string {
 	digits := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 	digitMap := CreateDigitMap(digits)
 
-	baseFromInt := len(baseFrom)
-	nbrInt := 0
-	for i, digit := range nbr {
-		nbrInt += digitMap[digit] * int(math.Pow(float64(baseFromInt), float64(len(nbr)-i-1)))
-	}
-
-	baseToInt := len(baseTo)
-	result := ""
-	for nbrInt > 0 {
-		result = string(digits[nbrInt%baseToInt]) + result
-		nbrInt /= baseToInt
-	}
+	nbrInt := baseToInt(nbr, baseFrom, digitMap)
+	result := baseFromInt(nbrInt, baseTo, digitMap)
 
 	if result == "" {
 		result = "0"
