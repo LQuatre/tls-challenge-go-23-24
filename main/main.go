@@ -2,12 +2,25 @@ package main
 
 import (
 	"fmt"
+
 	"piscine"
 )
 
+const N = 6
+
 func main() {
-	summary := "Burger Water Carrot Coffee Water Water Chips Carrot Carrot Burger Carrot Water"
-	for index, element := range piscine.ShoppingSummaryCounter(summary) {
-		fmt.Println(index, "=>", element)
+	a := make([]string, N)
+	a[0] = "a"
+	a[2] = "b"
+	a[4] = "c"
+
+	for _, v := range a {
+		fmt.Println(v)
+	}
+
+	fmt.Println("Size after compacting:", piscine.Compact(&a))
+
+	for _, v := range a {
+		fmt.Println(v)
 	}
 }
