@@ -1,6 +1,6 @@
 package piscine
 
-func Itoa(n int) string {
+func myItoa(n int) string {
 	var result string
 	var temp string
 	if n == 0 {
