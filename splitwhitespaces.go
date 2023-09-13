@@ -22,3 +22,15 @@ func SplitWhiteSpaces(s string) []string {
 	}
 	return result
 }
+
+func SplitWhiteSpaces2(s string) []string {
+	var result []string
+	var temp string
+	for i := 0; i < len(s); i++ {
+		temp += string(s[i])
+		if i == len(s)-1 {
+			AddTemp(&result, &temp)
+		}
+	}
+	return result
+}
