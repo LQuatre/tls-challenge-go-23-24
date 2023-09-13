@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
-	result := piscine.ConvertBase("n00nn0o1", "Zone01", "CHOUMIisDAcat!")
-	fmt.Println(result)
+	summary := "Burger Water Carrot Coffee Water Water Chips Carrot Carrot Burger Carrot Water"
+	for index, element := range piscine.ShoppingSummaryCounter(summary) {
+		fmt.Println(index, "=>", element)
+	}
 }
