@@ -5,7 +5,7 @@ func PrintWordsTables(a []string) {
 	temp := ""
 	for i := 0; i < len(a); i++ {
 		temp = a[i]
-		result = temp + "\n"
+		result += temp + "\n"
 	}
 	PrintStr(result)
 }
