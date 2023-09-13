@@ -8,7 +8,9 @@ func LoafOfBread(str string) string {
 
 	// If there is a space in the middle of a string it should ignore it and get the next character until getting to a length of 5.
 	// If the string is less than 5 characters return "Invalid Output\n".
-
+	if str == "" {
+		return "\n"
+	}
 	if len(str) < 5 {
 		return "Invalid Output\n"
 	}
