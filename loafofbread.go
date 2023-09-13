@@ -2,7 +2,7 @@ package piscine
 
 func LoafOfBread(str string) string {
 	result := ""
-	var count int
+	count := 0
 	// loafofbread
 	// Write a function LoafOfBread() that takes a string and returns another one with words of 5 characters and skips the next character followed by newline \n.
 
@@ -18,11 +18,11 @@ func LoafOfBread(str string) string {
 		}
 		if count == 5 {
 			result += " "
-			count = -1
+			count = 0
 		} else {
 			result += string(str[i])
+			count++
 		}
-		count++
 	}
 	return result + "\n"
 }
