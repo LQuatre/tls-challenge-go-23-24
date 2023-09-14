@@ -1,41 +1,63 @@
 package main
 
 import (
-	"io"
+	"io/ioutil"
 	"os"
+
+	"github.com/01-edu/z01"
 )
 
 func main() {
-	buffer := make([]byte, 1024) // Create a buffer to store the input data
-
-	// Read from stdin
-	for {
-		n, err := os.Stdin.Read(buffer)
-		if err != nil {
-			if err == io.EOF {
-				break // Exit the loop at the end of input
-			}
-			os.Stderr.WriteString("ERROR: " + err.Error() + "\n")
-			os.Exit(1)
-		}
-
-		// Write the read data to stdout
-		_, err = os.Stdout.Write(buffer[:n])
-		if err != nil {
-			os.Stderr.WriteString("ERROR: " + err.Error() + "\n")
-			os.Exit(1)
-		}
+	arguments := os.Args[1:]
+	length := 0
+	for l := range arguments {
+		length = l + 1
 	}
+
+	if length == 0 {
+		input, err := ioutil.ReadAll(os.Stdin)
+		for _, j := range string(input) {
+			z01.PrintRune(j)
+		}
+		if err != nil {
+			for _, e := range err.Error() {
+				z01.PrintRune(e)
+			}
+			z01.PrintRune('\n')
+		}
+		return
+	}
+
+	first := true
+
+	for _, arg := range arguments {
+		file, err := os.Open(arg)
+
+		if err != nil {
+			for _, e := range err.Error() {
+				z01.PrintRune(e)
+			}
+			z01.PrintRune('\n')
+		}
+		return
+
+		f, err := ioutil.ReadAll(file)
+
+		if !first {
+			z01.PrintRune('\n')
+		}
+		first = false
+		for _, text := range string(f) {
+			z01.PrintRune(text)
+		}
+		if err != nil {
+			for _, e := range err.Error() {
+				z01.PrintRune(e)
+			}
+			z01.PrintRune('\n')
+		}
+
+		file.Close()
+	}
+
 }
-This code reads from standard input (os.Stdin) and writes to standard output (os.Stdout) while handling errors. When you run it with your example:
-
-sh
-Copy code
-$ echo -ne " Ef6hI0LqyD k\n" | go run .
- Ef6hI0LqyD k
-It should produce the expected output without using any prohibited imports.
-
-
-
-
-
