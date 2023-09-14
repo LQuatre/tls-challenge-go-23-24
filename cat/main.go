@@ -7,53 +7,38 @@ import (
 	"github.com/01-edu/z01"
 )
 
+func PrintStr(str string) {
+	for _, c := range str {
+		z01.PrintRune(c)
+	}
+}
+
 func main() {
-	arguments := os.Args[1:]
-	length := 0
-	for l := range arguments {
-		length = l + 1
+	var count int
+	for i := range os.Args {
+		count = i
 	}
-
-	if length == 0 {
-		input, err := ioutil.ReadAll(os.Stdin)
-		for _, j := range string(input) {
-			z01.PrintRune(j)
-		}
+	if count == 0 {
+		str, err := ioutil.ReadAll(os.Stdin)
 		if err != nil {
-			for _, e := range err.Error() {
-				z01.PrintRune(e)
+			PrintStr("ERROR: " + err.Error() + "\n")
+			os.Exit(1)
+		} else {
+			PrintStr(string(str))
+		}
+	} else {
+		if len(os.Args) == 0 {
+			return
+		}
+		os.Args = os.Args[1:]
+		for i := range os.Args {
+			str, err := ioutil.ReadFile(os.Args[i])
+			if err != nil {
+				PrintStr("ERROR: " + err.Error() + "\n")
+				os.Exit(1)
+			} else {
+				PrintStr(string(str))
 			}
-			z01.PrintRune('\n')
 		}
-		return
-	}
-
-	first := true
-
-	for _, arg := range arguments {
-		file, err := os.Open(arg)
-		if err != nil {
-			for _, e := range err.Error() {
-				z01.PrintRune(e)
-			}
-			z01.PrintRune('\n')
-		}
-		return
-
-		f, err := ioutil.ReadAll(file)
-		if !first {
-			z01.PrintRune('\n')
-		}
-		first = false
-		for _, text := range string(f) {
-			z01.PrintRune(text)
-		}
-		if err != nil {
-			for _, e := range err.Error() {
-				z01.PrintRune(e)
-			}
-			z01.PrintRune('\n')
-		}
-		file.Close()
 	}
 }
