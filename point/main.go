@@ -23,8 +23,8 @@ func main() {
 	points := &point{}
 	setPoint(points)
 	PrintStr("x = ")
-	z01.PrintRune(points.x)
+	z01.PrintRune(rune(points.x) + 48)
 	PrintStr(", y = ")
-	z01.PrintRune(points.y)
+	z01.PrintRune(rune(points.y) + 48)
 	PrintStr("")
 }
