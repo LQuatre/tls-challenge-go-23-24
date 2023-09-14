@@ -1,35 +1,30 @@
 package main
 
 import (
-	"io/ioutil"
+	"bufio"
+	"fmt"
 	"os"
-
-	"github.com/01-edu/z01"
 )
-
-func PrintStr(str string) {
-	for _, c := range str {
-		z01.PrintRune(c)
-	}
-}
 
 func main() {
 	args := os.Args[1:]
+
 	if len(args) == 0 {
 		return
 	}
-	for i := 0; i < len(args); i++ {
-		bytes, err := ioutil.ReadFile(args[i])
-		if args[i] == "-ne" {
-			bytes, err = ioutil.ReadFile(args[i+1])
-			PrintStr(string(bytes))
-			return
-		}
-		if err != nil {
-			PrintStr("ERROR: open " + args[i] + ": no such file or directory\n")
-			os.Exit(1)
-			return
-		}
-		PrintStr(string(bytes))
+
+	scanner := bufio.NewScanner(os.Stdin)
+
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
+		os.Exit(1)
+	}
+
+	for _, arg := range args {
+		fmt.Println(arg)
 	}
 }
