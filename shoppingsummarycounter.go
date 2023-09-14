@@ -2,14 +2,14 @@ package piscine
 
 func ShoppingSummaryCounter(str string) map[string]int {
 	wordList := SplitWhiteSpaces(str)
-	counts := make(map[string]int)
+	result := make(map[string]int)
 	for _, word := range wordList {
-		_, ok := counts[word]
+		_, ok := result[word]
 		if ok {
-			counts[word] += 1
+			result[word] += 1
 		} else {
-			counts[word] = 1
+			result[word] = 1
 		}
 	}
-	return counts
+	return result
 }
