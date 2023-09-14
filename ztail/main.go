@@ -6,16 +6,24 @@ import (
 )
 
 func main() {
-	numChars := os.Args[2]
-	files := os.Args[3:]
+	status := true
+	if len(os.Args) >= 4 {
+		numChars := os.Args[2]
+		files := os.Args[3:]
 
-	for i := 0; i < len(files); i++ {
-		if err := tailFile(files[i], numChars); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			continue
+		for i := 0; i < len(files); i++ {
+			if err := tailFile(files[i], numChars); err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+				continue
+			}
 		}
+	} else {
+		status = false
 	}
-	os.Exit(1)
+	if !status {
+		os.Exit(1)
+	}
 }
 
 func tailFile(filename string, numChars string) error {
