@@ -25,6 +25,6 @@ func main() {
 			PrintStr("ERROR: " + err.Error() + "\n")
 			continue
 		}
-		PrintStr(string(bytes) + "\n")
+		PrintStr(string(bytes))
 	}
 }
