@@ -22,7 +22,7 @@ func PrintRune(r rune) {
 	if r >= 10 {
 		PrintRune(r / 10)
 	}
-	res := rune(r%10 + 48)
+	res := r % 10
 	z01.PrintRune(res)
 }
 
