@@ -49,13 +49,22 @@ func tailFile(filename string, numChars string) error {
 	fmt.Println()
 	fmt.Printf("==> %s <==\n", filename)
 
-	buf := make([]byte, numBytesToRead+2)
-	_, err = file.Read(buf)
+	file_stat, err := file.Stat()
 	if err != nil {
-		return err
+		fmt.Printf("could not obtain stat for file %v\n", filename)
 	}
-
-	fmt.Printf("%s", buf)
+	content := make([]byte, file_stat.Size())
+	file.Read(content)
+	contentinrune := []rune(string(content))
+	if len(contentinrune) >= int(numBytesToRead) {
+		last_chars := make([]rune, numBytesToRead)
+		for j := 0; j < len(last_chars); j++ {
+			last_chars[j] = contentinrune[len(contentinrune)-int(numBytesToRead)+j]
+		}
+		fmt.Print(string(last_chars))
+	} else {
+		fmt.Print(string(contentinrune))
+	}
 	return nil
 }
 
