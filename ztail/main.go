@@ -1,65 +1,66 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
+	"strconv"
 )
 
 func main() {
-	// Parse command line arguments
-	count := flag.Int("c", 0, "number of bytes to print from the end of the file")
-	flag.Parse()
+	if len(os.Args) < 3 {
+		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
+		os.Exit(1)
+	}
 
-	// Get the list of files to process
-	files := flag.Args()
+	c := os.Args[1]
+	if c != "-c" {
+		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
+		os.Exit(1)
+	}
 
-	// Loop over each file and print the last count bytes
-	for _, file := range files {
-		// Print the file name if there are multiple files
-		if len(files) > 1 {
-			fmt.Printf("==> %s <==\n", file)
+	num := os.Args[2]
+	if num[0] == '-' {
+		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
+		os.Exit(1)
+	}
+
+	for i := 3; i < len(os.Args); i++ {
+		if i > 3 {
+			fmt.Println()
 		}
-
-		// Open the file
-		f, err := os.Open(file)
+		fmt.Printf("==> %s <==\n", os.Args[i])
+		f, err := os.Open(os.Args[i])
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "open %s: %v\n", file, err)
+			fmt.Fprintf(os.Stderr, "open %s: %v\n", os.Args[i], err)
 			continue
 		}
 		defer f.Close()
 
-		// Get the file size
-		fi, err := f.Stat()
+		stat, err := f.Stat()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "stat %s: %v\n", file, err)
-			continue
-		}
-		size := fi.Size()
-
-		// Read the last count bytes
-		offset := size - int64(*count)
-		if offset < 0 {
-			offset = 0
-		}
-		_, err = f.Seek(offset, 0)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "seek %s: %v\n", file, err)
-			continue
-		}
-		data, err := ioutil.ReadAll(f)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "read %s: %v\n", file, err)
+			fmt.Fprintf(os.Stderr, "stat %s: %v\n", os.Args[i], err)
 			continue
 		}
 
-		// Print the data
-		fmt.Printf("%s", data)
+		if stat.IsDir() {
+			fmt.Fprintf(os.Stderr, "%s is a directory\n", os.Args[i])
+			continue
+		}
 
-		// Print a newline between files
-		if len(files) > 1 {
-			fmt.Println()
+		if numInt, err := strconv.Atoi(num); err == nil {
+			if stat.Size() < int64(numInt) {
+				numInt = int(stat.Size())
+			}
+			if _, err := f.Seek(-int64(numInt), io.SeekEnd); err != nil {
+				fmt.Fprintf(os.Stderr, "seek %s: %v\n", os.Args[i], err)
+				continue
+			}
+		}
+
+		if _, err := io.Copy(os.Stdout, f); err != nil {
+			fmt.Fprintf(os.Stderr, "copy %s: %v\n", os.Args[i], err)
+			continue
 		}
 	}
 }
