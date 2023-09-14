@@ -1,10 +1,17 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
+	"io/ioutil"
 	"os"
+
+	"github.com/01-edu/z01"
 )
+
+func PrintStr(str string) {
+	for _, c := range str {
+		z01.PrintRune(c)
+	}
+}
 
 func main() {
 	args := os.Args[1:]
@@ -13,18 +20,15 @@ func main() {
 		return
 	}
 
-	scanner := bufio.NewScanner(os.Stdin)
-
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
+	bytes, err := ioutil.ReadAll(os.Stdin)
+	if err != nil {
+		PrintStr("ERROR: " + err.Error() + "\n")
 		os.Exit(1)
 	}
 
-	for _, arg := range args {
-		fmt.Println(arg)
+	for i := 0; i < len(args); i++ {
+		PrintStr(args[i] + "\n")
 	}
+
+	PrintStr(string(bytes))
 }
