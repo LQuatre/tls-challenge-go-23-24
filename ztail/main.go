@@ -9,15 +9,15 @@ func main() {
 	numChars := os.Args[2]
 	files := os.Args[3:]
 
-	for _, file := range files {
-		fmt.Printf("==> %s <==\n", file)
+	for i := 0; i < len(files); i++ {
+		fmt.Printf("==> %s <==\n", files[i])
 
-		if err := tailFile(file, numChars); err != nil {
+		if err := tailFile(files[i], numChars); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 
-		if len(files) > 1 {
-			// fmt.Println()
+		if i < len(files)-1 {
+			fmt.Println()
 		}
 	}
 }
