@@ -49,7 +49,7 @@ func tailFile(filename string, numChars string) error {
 	fmt.Println()
 	fmt.Printf("==> %s <==\n", filename)
 
-	buf := make([]byte, numBytesToRead)
+	buf := make([]byte, numBytesToRead+2)
 	_, err = file.Read(buf)
 	if err != nil {
 		return err
@@ -68,5 +68,5 @@ func parseNumChars(numChars string) (int64, error) {
 			return 0, fmt.Errorf("invalid number of characters: %s", numChars)
 		}
 	}
-	return num + 1, nil
+	return num, nil
 }
