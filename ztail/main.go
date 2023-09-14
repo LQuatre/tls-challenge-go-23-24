@@ -14,6 +14,7 @@ func main() {
 		for i := 0; i < len(files); i++ {
 			if err := tailFile(files[i], numChars); err != nil {
 				fmt.Printf("open %v: no such file or directory\n", files[i])
+				status = false
 				continue
 			}
 		}
