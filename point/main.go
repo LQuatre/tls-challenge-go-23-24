@@ -3,13 +3,13 @@ package main
 import "github.com/01-edu/z01"
 
 type point struct {
-	x int
-	y int
+	x rune
+	y rune
 }
 
 func setPoint(ptr *point) {
-	ptr.x = 42
-	ptr.y = 21
+	ptr.x = 42 + 48
+	ptr.y = 21 + 48
 }
 
 func PrintStr(str string) {
@@ -23,8 +23,8 @@ func main() {
 	points := &point{}
 	setPoint(points)
 	PrintStr("x = ")
-	z01.PrintRune(rune(points.x + 48))
+	z01.PrintRune(points.x)
 	PrintStr(", y = ")
-	z01.PrintRune(rune(points.y + 48))
+	z01.PrintRune(points.y)
 	PrintStr("")
 }
