@@ -17,7 +17,7 @@ func main() {
 		}
 
 		if len(files) > 1 {
-			fmt.Println()
+			// fmt.Println()
 		}
 	}
 }
