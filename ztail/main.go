@@ -35,11 +35,6 @@ func tailFile(filename string, numChars string) error {
 	}
 	defer file.Close()
 
-	fileInfo, err := file.Stat()
-	if err != nil {
-		return err
-	}
-
 	fmt.Println()
 	fmt.Printf("==> %s <==\n", filename)
 
