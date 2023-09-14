@@ -20,6 +20,7 @@ func main() {
 			fmt.Println()
 		}
 	}
+	os.Exit(1)
 }
 
 func tailFile(filename string, numChars string) error {
