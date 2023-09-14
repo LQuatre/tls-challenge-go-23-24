@@ -3,8 +3,8 @@ package main
 import "github.com/01-edu/z01"
 
 type point struct {
-	x int
-	y int
+	x rune
+	y rune
 }
 
 func setPoint(ptr *point) {
@@ -18,7 +18,7 @@ func PrintStr(str string) {
 	}
 }
 
-func PrintRune(r int) {
+func PrintRune(r rune) {
 	if r >= 10 {
 		PrintRune(r / 10)
 	}
