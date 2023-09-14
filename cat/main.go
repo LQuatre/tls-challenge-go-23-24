@@ -32,7 +32,6 @@ func main() {
 
 	for _, arg := range arguments {
 		file, err := os.Open(arg)
-
 		if err != nil {
 			for _, e := range err.Error() {
 				z01.PrintRune(e)
@@ -42,7 +41,6 @@ func main() {
 		return
 
 		f, err := ioutil.ReadAll(file)
-
 		if !first {
 			z01.PrintRune('\n')
 		}
@@ -56,8 +54,6 @@ func main() {
 			}
 			z01.PrintRune('\n')
 		}
-
 		file.Close()
 	}
-
 }
