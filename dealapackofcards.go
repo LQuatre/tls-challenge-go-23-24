@@ -9,7 +9,9 @@ func DealAPackOfCards(deck []int) {
 		for j := i * 3; j < i*3+3; j++ {
 			result += " "
 			result += IntToString(deck[j])
-			result += ","
+			if j != i*3+2 {
+				result += ","
+			}
 		}
 		result += "\n"
 	}
