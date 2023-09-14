@@ -27,6 +27,8 @@ func main() {
 }
 
 func tailFile(filename string, numChars string) error {
+	option := []rune(os.Args[2])
+	value := IntConv(option)
 	file, err := os.Open(filename)
 	if err != nil {
 		return err
@@ -34,22 +36,6 @@ func tailFile(filename string, numChars string) error {
 	defer file.Close()
 
 	fileInfo, err := file.Stat()
-	if err != nil {
-		return err
-	}
-
-	fileSize := fileInfo.Size()
-
-	numBytesToRead, err := parseNumChars(numChars)
-	if err != nil {
-		return err
-	}
-
-	if fileSize < numBytesToRead {
-		numBytesToRead = fileSize
-	}
-
-	_, err = file.Seek(fileSize-numBytesToRead, 0)
 	if err != nil {
 		return err
 	}
@@ -64,10 +50,10 @@ func tailFile(filename string, numChars string) error {
 	content := make([]byte, file_stat.Size())
 	file.Read(content)
 	contentinrune := []rune(string(content))
-	if len(contentinrune) >= int(numBytesToRead) {
-		last_chars := make([]rune, numBytesToRead)
+	if len(contentinrune) >= value {
+		last_chars := make([]rune, value)
 		for j := 0; j < len(last_chars); j++ {
-			last_chars[j] = contentinrune[len(contentinrune)-int(numBytesToRead)+j]
+			last_chars[j] = contentinrune[len(contentinrune)-value+j]
 		}
 		fmt.Print(string(last_chars))
 	} else {
@@ -76,14 +62,15 @@ func tailFile(filename string, numChars string) error {
 	return nil
 }
 
-func parseNumChars(numChars string) (int64, error) {
-	var num int64
-	for _, char := range numChars {
-		if char >= '0' && char <= '9' {
-			num = num*10 + int64(char-'0')
-		} else {
-			return 0, fmt.Errorf("invalid number of characters: %s", numChars)
+func IntConv(option []rune) int {
+	value := 0
+	for i := 0; i < len(option); i++ {
+		digit := int(option[i] - '0')
+		decimal := 1
+		for j := 0; j < len(option)-1-i; j++ {
+			decimal *= 10
 		}
+		value += digit * decimal
 	}
-	return num, nil
+	return value
 }
