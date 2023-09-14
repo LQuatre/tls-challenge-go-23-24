@@ -68,5 +68,5 @@ func parseNumChars(numChars string) (int64, error) {
 			return 0, fmt.Errorf("invalid number of characters: %s", numChars)
 		}
 	}
-	return num + 2, nil
+	return num + 1, nil
 }
