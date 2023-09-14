@@ -10,11 +10,12 @@ func main() {
 	files := os.Args[3:]
 
 	for i := 0; i < len(files); i++ {
-		fmt.Printf("==> %s <==\n", files[i])
-
 		if err := tailFile(files[i], numChars); err != nil {
 			fmt.Fprintln(os.Stderr, err)
+			continue
 		}
+
+		fmt.Printf("==> %s <==\n", files[i])
 
 		if i != len(files)-1 {
 			fmt.Println()
