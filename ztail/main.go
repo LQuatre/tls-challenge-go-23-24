@@ -6,11 +6,6 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 3 {
-		fmt.Fprintln(os.Stderr, "Usage: go run . -c <num_chars> <file1> [<file2> ...]")
-		os.Exit(1)
-	}
-
 	numChars := os.Args[2]
 	files := os.Args[3:]
 
@@ -19,7 +14,6 @@ func main() {
 
 		if err := tailFile(file, numChars); err != nil {
 			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
 		}
 
 		if len(files) > 1 {
