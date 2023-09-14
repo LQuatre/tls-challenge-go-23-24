@@ -30,7 +30,6 @@ func main() {
 		f, err := os.Open(args[i])
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
-			os.Exit(1)
 			continue
 		}
 		defer f.Close()
@@ -39,7 +38,6 @@ func main() {
 		fi, err := f.Stat()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
-			os.Exit(1)
 			continue
 		}
 		size := fi.Size()
@@ -54,7 +52,6 @@ func main() {
 		_, err = f.ReadAt(b, offset)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
-			os.Exit(1)
 			continue
 		}
 
@@ -64,4 +61,5 @@ func main() {
 			fmt.Println()
 		}
 	}
+	os.Exit(1)
 }
