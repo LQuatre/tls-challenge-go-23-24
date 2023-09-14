@@ -19,10 +19,11 @@ func main() {
 		PrintStr("File name missing\n")
 		return
 	}
-	for _, arg := range args {
-		bytes, err := ioutil.ReadFile(arg)
+	for i := 0; i < len(args); i++ {
+		bytes, err := ioutil.ReadFile(args[i])
 		if err != nil {
 			PrintStr("ERROR: " + err.Error() + "\n")
+			PrintStr("Exit status: " + string(i) + "\n")
 			continue
 		}
 		PrintStr(string(bytes))
