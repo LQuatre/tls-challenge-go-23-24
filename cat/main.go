@@ -23,7 +23,7 @@ func main() {
 		bytes, err := ioutil.ReadFile(args[i])
 		if err != nil {
 			PrintStr("ERROR: " + err.Error() + "\n")
-			PrintStr("exit status: " + string(i+1+'0'))
+			PrintStr("exit status " + string(i+1+'0'))
 			return
 		}
 		PrintStr(string(bytes))
