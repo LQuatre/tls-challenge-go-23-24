@@ -12,10 +12,7 @@ func main() {
 	for i := 0; i < len(files); i++ {
 		if err := tailFile(files[i], numChars); err != nil {
 			fmt.Fprintln(os.Stderr, err)
-		}
-
-		if i != len(files)-1 {
-			fmt.Println()
+			continue
 		}
 	}
 	os.Exit(1)
@@ -49,6 +46,7 @@ func tailFile(filename string, numChars string) error {
 		return err
 	}
 
+	fmt.Println()
 	fmt.Printf("==> %s <==\n", filename)
 
 	buf := make([]byte, numBytesToRead)
