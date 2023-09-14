@@ -14,6 +14,7 @@ func main() {
 		for i := 0; i < len(files); i++ {
 			if err := tailFile(files[i], numChars, i); err != nil {
 				fmt.Fprintln(os.Stderr, err)
+				fmt.Println()
 				status = false
 				continue
 			}
