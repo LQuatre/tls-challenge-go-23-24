@@ -22,7 +22,7 @@ func main() {
 	for _, arg := range args {
 		bytes, err := ioutil.ReadFile(arg)
 		if err != nil {
-			PrintStr("ERROR: open " + arg + ": " + err.Error() + "\n")
+			PrintStr("ERROR: open: " + err.Error() + "\n")
 			continue
 		}
 		PrintStr(string(bytes))
