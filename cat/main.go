@@ -1,34 +1,41 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
-
-	"github.com/01-edu/z01"
 )
 
-func PrintStr(str string) {
-	for _, c := range str {
-		z01.PrintRune(c)
-	}
-}
-
 func main() {
-	args := os.Args[1:]
+	buffer := make([]byte, 1024) // Create a buffer to store the input data
 
-	if len(args) == 0 {
-		return
+	// Read from stdin
+	for {
+		n, err := os.Stdin.Read(buffer)
+		if err != nil {
+			if err == io.EOF {
+				break // Exit the loop at the end of input
+			}
+			os.Stderr.WriteString("ERROR: " + err.Error() + "\n")
+			os.Exit(1)
+		}
+
+		// Write the read data to stdout
+		_, err = os.Stdout.Write(buffer[:n])
+		if err != nil {
+			os.Stderr.WriteString("ERROR: " + err.Error() + "\n")
+			os.Exit(1)
+		}
 	}
-
-	bytes, err := ioutil.ReadAll(os.Stdin)
-	if err != nil {
-		PrintStr("ERROR: " + err.Error() + "\n")
-		os.Exit(1)
-	}
-
-	for i := 0; i < len(args); i++ {
-		PrintStr(args[i] + "\n")
-	}
-
-	PrintStr(string(bytes))
 }
+This code reads from standard input (os.Stdin) and writes to standard output (os.Stdout) while handling errors. When you run it with your example:
+
+sh
+Copy code
+$ echo -ne " Ef6hI0LqyD k\n" | go run .
+ Ef6hI0LqyD k
+It should produce the expected output without using any prohibited imports.
+
+
+
+
+
