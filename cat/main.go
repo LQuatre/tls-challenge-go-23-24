@@ -20,6 +20,11 @@ func main() {
 	}
 	for i := 0; i < len(args); i++ {
 		bytes, err := ioutil.ReadFile(args[i])
+		if args[i] == "-ne" {
+			bytes, err = ioutil.ReadFile(args[i+1])
+			PrintStr(string(bytes))
+			return
+		}
 		if err != nil {
 			PrintStr("ERROR: open " + args[i] + ": no such file or directory\n")
 			os.Exit(1)
