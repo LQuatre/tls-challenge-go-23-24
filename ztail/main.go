@@ -29,7 +29,8 @@ func main() {
 		// Open the args[i]
 		f, err := os.Open(args[i])
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "open %s: %v\n", args[i], err)
+			fmt.Fprintf(os.Stderr, "%s\n", err)
+			os.Exit(1)
 			continue
 		}
 		defer f.Close()
@@ -37,7 +38,8 @@ func main() {
 		// Get the args[i] size
 		fi, err := f.Stat()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "stat %s: %v\n", args[i], err)
+			fmt.Fprintf(os.Stderr, "%s\n", err)
+			os.Exit(1)
 			continue
 		}
 		size := fi.Size()
@@ -51,7 +53,8 @@ func main() {
 		b := make([]byte, StringToInt(args[1])+2)
 		_, err = f.ReadAt(b, offset)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "read %s: %v\n", args[i], err)
+			fmt.Fprintf(os.Stderr, "%s\n", err)
+			os.Exit(1)
 			continue
 		}
 
