@@ -21,11 +21,6 @@ func main() {
 	for i := 0; i < len(args); i++ {
 		bytes, err := ioutil.ReadFile(args[i])
 		if err != nil {
-			// Your program does not fail when it should (with a non-zero exit status) :
-
-			// $ go run . "asd"
-			// ERROR: open asd: no such file or directory
-			// exit status 1$
 			PrintStr("ERROR: open " + args[i] + ": no such file or directory\n")
 			os.Exit(1)
 			return
