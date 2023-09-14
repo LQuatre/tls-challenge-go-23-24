@@ -16,7 +16,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 		}
 
-		if i < len(files)-1 {
+		if i != len(files)-1 {
 			fmt.Println()
 		}
 	}
