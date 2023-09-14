@@ -8,8 +8,8 @@ type point struct {
 }
 
 func setPoint(ptr *point) {
-	ptr.x = 42 + 48
-	ptr.y = 21 + 48
+	ptr.x = 42
+	ptr.y = 21
 }
 
 func PrintStr(str string) {
