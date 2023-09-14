@@ -5,61 +5,75 @@ import (
 	"os"
 )
 
-func StringToInt(s string) int {
-	var result int
-	for _, c := range s {
-		if c < '0' || c > '9' {
-			return -1
-		}
-		result = result*10 + int(c-'0')
-	}
-	return result
-}
-
 func main() {
-	// Get the list of files to read
-	args := os.Args[1:]
-	// Loop through each args[i] and print the last 10 bytes
-	for i := 2; i < len(args); i++ {
-		fileContents, err := os.ReadFile(args[i])
-		if len(fileContents) > 1 {
-			fmt.Printf("==> %s <==\n", args[i])
+	if len(os.Args) < 3 {
+		fmt.Fprintln(os.Stderr, "Usage: go run . -c <num_chars> <file1> [<file2> ...]")
+		os.Exit(1)
+	}
+
+	numChars := os.Args[2]
+	files := os.Args[3:]
+
+	for _, file := range files {
+		fmt.Printf("==> %s <==\n", file)
+
+		if err := tailFile(file, numChars); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
 		}
 
-		// Open the args[i]
-		f, err := os.Open(args[i])
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "%s\n", err)
-			continue
-		}
-		defer f.Close()
-
-		// Get the args[i] size
-		fi, err := f.Stat()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "%s\n", err)
-			continue
-		}
-		size := fi.Size()
-
-		// Read the last args[1] bytes of the args[i]
-		var offset int64
-		if size > int64(StringToInt(args[1])+2) {
-			offset = size - int64(StringToInt(args[1])+2)
-		}
-
-		b := make([]byte, StringToInt(args[1])+2)
-		_, err = f.ReadAt(b, offset)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "%s\n", err)
-			continue
-		}
-
-		// Print the last 10 bytes of the args[i]
-		fmt.Printf("%s", b)
-		if b[len(b)-1] != '\n' {
+		if len(files) > 1 {
 			fmt.Println()
 		}
 	}
-	os.Exit(1)
+}
+
+func tailFile(filename string, numChars string) error {
+	file, err := os.Open(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	fileInfo, err := file.Stat()
+	if err != nil {
+		return err
+	}
+
+	fileSize := fileInfo.Size()
+
+	numBytesToRead, err := parseNumChars(numChars)
+	if err != nil {
+		return err
+	}
+
+	if fileSize < numBytesToRead {
+		numBytesToRead = fileSize
+	}
+
+	_, err = file.Seek(fileSize-numBytesToRead, 0)
+	if err != nil {
+		return err
+	}
+
+	buf := make([]byte, numBytesToRead)
+	_, err = file.Read(buf)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("%s", buf)
+	return nil
+}
+
+func parseNumChars(numChars string) (int64, error) {
+	var num int64
+	for _, char := range numChars {
+		if char >= '0' && char <= '9' {
+			num = num*10 + int64(char-'0')
+		} else {
+			return 0, fmt.Errorf("invalid number of characters: %s", numChars)
+		}
+	}
+	return num + 2, nil
 }
