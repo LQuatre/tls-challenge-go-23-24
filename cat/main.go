@@ -16,7 +16,6 @@ func PrintStr(str string) {
 func main() {
 	args := os.Args[1:]
 	if len(args) == 0 {
-		PrintStr("File name missing\n")
 		return
 	}
 	for i := 0; i < len(args); i++ {
