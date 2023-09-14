@@ -2,65 +2,63 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"os"
-	"strconv"
 )
 
-func main() {
-	if len(os.Args) < 3 {
-		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
-		os.Exit(1)
-	}
-
-	c := os.Args[1]
-	if c != "-c" {
-		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
-		os.Exit(1)
-	}
-
-	num := os.Args[2]
-	if num[0] == '-' {
-		fmt.Fprintln(os.Stderr, "usage: ztail -c num file1 file2 ...")
-		os.Exit(1)
-	}
-
-	for i := 3; i < len(os.Args); i++ {
-		if i > 3 {
-			fmt.Println()
+func StringToInt(s string) int {
+	var result int
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return -1
 		}
-		fmt.Printf("==> %s <==\n", os.Args[i])
-		f, err := os.Open(os.Args[i])
+		result = result*10 + int(c-'0')
+	}
+	return result
+}
+
+func main() {
+	// Get the list of files to read
+	args := os.Args[1:]
+	// Loop through each args[i] and print the last 10 bytes
+	for i := 2; i < len(args); i++ {
+		fileContents, err := os.ReadFile(args[i])
+		if len(fileContents) > 1 {
+			fmt.Printf("==> %s <==\n", args[i])
+		}
+
+		// Open the args[i]
+		f, err := os.Open(args[i])
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "open %s: %v\n", os.Args[i], err)
+			fmt.Fprintf(os.Stderr, "open %s: %v\n", args[i], err)
 			continue
 		}
 		defer f.Close()
 
-		stat, err := f.Stat()
+		// Get the args[i] size
+		fi, err := f.Stat()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "stat %s: %v\n", os.Args[i], err)
+			fmt.Fprintf(os.Stderr, "stat %s: %v\n", args[i], err)
+			continue
+		}
+		size := fi.Size()
+
+		// Read the last args[1] bytes of the args[i]
+		var offset int64
+		if size > int64(StringToInt(args[1])+2) {
+			offset = size - int64(StringToInt(args[1])+2)
+		}
+
+		b := make([]byte, StringToInt(args[1])+2)
+		_, err = f.ReadAt(b, offset)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "read %s: %v\n", args[i], err)
 			continue
 		}
 
-		if stat.IsDir() {
-			fmt.Fprintf(os.Stderr, "%s is a directory\n", os.Args[i])
-			continue
-		}
-
-		if numInt, err := strconv.Atoi(num); err == nil {
-			if stat.Size() < int64(numInt) {
-				numInt = int(stat.Size())
-			}
-			if _, err := f.Seek(-int64(numInt), io.SeekEnd); err != nil {
-				fmt.Fprintf(os.Stderr, "seek %s: %v\n", os.Args[i], err)
-				continue
-			}
-		}
-
-		if _, err := io.Copy(os.Stdout, f); err != nil {
-			fmt.Fprintf(os.Stderr, "copy %s: %v\n", os.Args[i], err)
-			continue
+		// Print the last 10 bytes of the args[i]
+		fmt.Printf("%s", b)
+		if b[len(b)-1] != '\n' {
+			fmt.Println()
 		}
 	}
 }
