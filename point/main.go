@@ -33,4 +33,5 @@ func main() {
 	PrintRune(points.x)
 	PrintStr(", y = ")
 	PrintRune(points.y)
+	PrintStr("\n")
 }
