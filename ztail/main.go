@@ -54,9 +54,7 @@ func tailFile(filename string, numChars string, pos int) error {
 		return err
 	}
 
-	if pos > 3 {
-		fmt.Print("\n")
-	}
+	fmt.Println()
 	fmt.Printf("==> %s <==\n", filename)
 
 	buf := make([]byte, numBytesToRead)
