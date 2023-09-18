@@ -5,68 +5,58 @@ import (
 	"os"
 )
 
+func IntConv(option []rune) int {
+	value := 0
+	for i := 0; i < len(option); i++ {
+		digit := int(option[i] - '0')
+		decimal := 1
+		for j := 0; j < len(option)-1-i; j++ {
+			decimal *= 10
+		}
+		value += digit * decimal
+	}
+	return value
+}
+
 func main() {
-	numChars := os.Args[2]
-	files := os.Args[3:]
-
-	for i := 0; i < len(files); i++ {
-		if err := tailFile(files[i], numChars); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			continue
+	status := true
+	if len(os.Args) >= 4 {
+		option := []rune(os.Args[2])
+		value := IntConv(option)
+		for i := 3; i < len(os.Args); i++ {
+			file, err := os.Open(os.Args[i])
+			if err != nil {
+				fmt.Printf("open %v: no such file or directory\n", os.Args[i])
+				status = false
+				continue
+			}
+			if len(os.Args) > 4 {
+				if i > 3 {
+					fmt.Print("\n")
+				}
+				fmt.Printf("==> %v <==\n", os.Args[i])
+			}
+			file_stat, err := file.Stat()
+			if err != nil {
+				fmt.Printf("could not obtain stat for file %v\n", os.Args[i])
+			}
+			content := make([]byte, file_stat.Size())
+			file.Read(content)
+			contentinrune := []rune(string(content))
+			if len(contentinrune) >= value {
+				last_chars := make([]rune, value)
+				for j := 0; j < len(last_chars); j++ {
+					last_chars[j] = contentinrune[len(contentinrune)-value+j]
+				}
+				fmt.Print(string(last_chars))
+			} else {
+				fmt.Print(string(contentinrune))
+			}
 		}
+	} else {
+		status = false
 	}
-	os.Exit(1)
-}
-
-func tailFile(filename string, numChars string) error {
-	file, err := os.Open(filename)
-	if err != nil {
-		return err
+	if !status {
+		os.Exit(1)
 	}
-	defer file.Close()
-
-	fileInfo, err := file.Stat()
-	if err != nil {
-		return err
-	}
-
-	fileSize := fileInfo.Size()
-
-	numBytesToRead, err := parseNumChars(numChars)
-	if err != nil {
-		return err
-	}
-
-	if fileSize < numBytesToRead {
-		numBytesToRead = fileSize
-	}
-
-	_, err = file.Seek(fileSize-numBytesToRead, 0)
-	if err != nil {
-		return err
-	}
-
-	fmt.Println()
-	fmt.Printf("==> %s <==\n", filename)
-
-	buf := make([]byte, numBytesToRead)
-	_, err = file.Read(buf)
-	if err != nil {
-		return err
-	}
-
-	fmt.Printf("%s", buf)
-	return nil
-}
-
-func parseNumChars(numChars string) (int64, error) {
-	var num int64
-	for _, char := range numChars {
-		if char >= '0' && char <= '9' {
-			num = num*10 + int64(char-'0')
-		} else {
-			return 0, fmt.Errorf("invalid number of characters: %s", numChars)
-		}
-	}
-	return num + 1, nil
 }
