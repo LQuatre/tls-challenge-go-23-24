@@ -35,15 +35,6 @@ func main() {
 	a := Atoi(os.Args[1])
 	b := Atoi(os.Args[3])
 
-	if a == 0 && os.Args[1] != "0" {
-		os.Stdout.WriteString("No Modulo by 0\n")
-		return
-	}
-	if b == 0 && os.Args[3] != "0" {
-		os.Stdout.WriteString("No Modulo by 0\n")
-		return
-	}
-
 	switch op {
 	case "+":
 		os.Stdout.WriteString(Itoa(a + b))
@@ -53,11 +44,13 @@ func main() {
 		os.Stdout.WriteString(Itoa(a * b))
 	case "/":
 		if b == 0 {
+			os.Stdout.WriteString("No division by 0")
 			return
 		}
-
+		os.Stdout.WriteString(Itoa(a / b))
 	case "%":
 		if b == 0 {
+			os.Stdout.WriteString("No modulo by 0")
 			return
 		}
 		os.Stdout.WriteString(Itoa(a % b))
