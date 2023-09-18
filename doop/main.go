@@ -3,30 +3,41 @@ package main
 import "os"
 
 func Atoi(s string) (int, string) {
-	var res int
-	var sign int = 1
-	for _, v := range s {
-		if v == '-' && res == 0 {
-			sign = -1
-			continue
-		} else if v == '+' && res == 0 {
-			continue
-		} else if v < '0' || v > '9' {
-			return 0, "marche pas"
-		}
-		res = res*10 + int(v-'0')
+	// gestion du signe
+	sign := 1
+	if s[0] == '-' {
+		sign = -1
+		s = s[1:]
 	}
-	res *= sign
-	return res, "ok"
+	if s[0] == '+' {
+		s = s[1:]
+	}
+	res := 0
+	for _, v := range s {
+		if v >= '0' && v <= '9' {
+			res = res*10 + int(v-'0')
+		} else {
+			return 0, "error"
+		}
+	}
+	return res * sign, "ok"
 }
 
 func Itoa(n int) string {
-	var res string
+	if n == 0 {
+		return "0"
+	}
+	sign := ""
+	if n < 0 {
+		sign = "-"
+		n = -n
+	}
+	s := ""
 	for n > 0 {
-		res = string(n%10+'0') + res
+		s = string(n%10+'0') + s
 		n /= 10
 	}
-	return res
+	return sign + s
 }
 
 func main() {
@@ -49,6 +60,7 @@ func main() {
 
 	b, err := Atoi(os.Args[3])
 	if err != "ok" {
+
 		return
 	}
 	if b > 9223372036854775807 || b < -9223372036854775808 {
