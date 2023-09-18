@@ -36,9 +36,15 @@ func main() {
 	if err != "ok" {
 		return
 	}
+	if a > 9223372036854775807 || a < -9223372036854775808 {
+		return
+	}
 
 	b, err := Atoi(os.Args[3])
 	if err != "ok" {
+		return
+	}
+	if b > 9223372036854775807 || b < -9223372036854775808 {
 		return
 	}
 
