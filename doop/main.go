@@ -12,12 +12,6 @@ func Atoi(s string) (int, string) {
 	if s[0] == '+' {
 		s = s[1:]
 	}
-	if s > "9223372036854775807" && sign == 1 {
-		return 0, "error"
-	}
-	if s > "9223372036854775808" && sign == -1 {
-		return 0, "error"
-	}
 	res := 0
 	for _, v := range s {
 		if v >= '0' && v <= '9' {
@@ -25,6 +19,19 @@ func Atoi(s string) (int, string) {
 		} else {
 			return 0, "error"
 		}
+	}
+	println(Itoa(res))
+	if res >= 9223372036854775807 && sign == 1 {
+		return 0, "error"
+	}
+	if res >= 9223372036854775807 && sign == -1 {
+		return 0, "error"
+	}
+	if res <= -9223372036854775807 && sign == 1 {
+		return 0, "error"
+	}
+	if res <= -9223372036854775807 && sign == -1 {
+		return 0, "error"
 	}
 	return res * sign, "ok"
 }
