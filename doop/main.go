@@ -2,15 +2,15 @@ package main
 
 import "os"
 
-func Atoi(s string) int {
+func Atoi(s string) (int, string) {
 	var res int
 	for _, v := range s {
 		if v < '0' || v > '9' {
-			return 0
+			return 0, "marche pas"
 		}
 		res = res*10 + int(v-'0')
 	}
-	return res
+	return res, "ok"
 }
 
 func Itoa(n int) string {
@@ -32,8 +32,15 @@ func main() {
 		return
 	}
 
-	a := Atoi(os.Args[1])
-	b := Atoi(os.Args[3])
+	a, err := Atoi(os.Args[1])
+	if err != "ok" {
+		return
+	}
+
+	b, err := Atoi(os.Args[3])
+	if err != "ok" {
+		return
+	}
 
 	switch op {
 	case "+":
