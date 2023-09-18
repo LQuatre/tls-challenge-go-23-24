@@ -37,22 +37,22 @@ func main() {
 
 	switch op {
 	case "+":
-		os.Stdout.WriteString(Itoa(a + b))
+		os.Stdout.WriteString(Itoa(a+b) + "\n")
 	case "-":
-		os.Stdout.WriteString(Itoa(a - b))
+		os.Stdout.WriteString(Itoa(a-b) + "\n")
 	case "*":
-		os.Stdout.WriteString(Itoa(a * b))
+		os.Stdout.WriteString(Itoa(a*b) + "\n")
 	case "/":
 		if b == 0 {
-			os.Stdout.WriteString("No division by 0")
+			os.Stdout.WriteString("No division by 0\n")
 			return
 		}
-		os.Stdout.WriteString(Itoa(a / b))
+		os.Stdout.WriteString(Itoa(a/b) + "\n")
 	case "%":
 		if b == 0 {
-			os.Stdout.WriteString("No modulo by 0")
+			os.Stdout.WriteString("No modulo by 0\n")
 			return
 		}
-		os.Stdout.WriteString(Itoa(a % b))
+		os.Stdout.WriteString(Itoa(a%b) + "\n")
 	}
 }
