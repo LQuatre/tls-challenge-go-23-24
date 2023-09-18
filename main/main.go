@@ -6,16 +6,8 @@ import (
 )
 
 func main() {
-	a1 := []int{0, 1, 2, 3, 4, 5}
-	a2 := []int{0, 2, 1, 3}
+	result := []string{"a", "A", "1", "b", "B", "2", "c", "C", "3"}
+	piscine.SortWordArr(result)
 
-	f := func(a, b int) int {
-		return a - b
-	}
-
-	result1 := piscine.IsSorted(f, a1)
-	result2 := piscine.IsSorted(f, a2)
-
-	fmt.Println(result1)
-	fmt.Println(result2)
+	fmt.Println(result)
 }
