@@ -8,8 +8,9 @@ func Atoi(s string) (int, string) {
 	for _, v := range s {
 		if v == '-' && res == 0 {
 			sign = -1
+			continue
 		} else if v == '+' && res == 0 {
-			sign = 1
+			continue
 		} else if v < '0' || v > '9' {
 			return 0, "marche pas"
 		}
