@@ -7,4 +7,3 @@ func Map(f func(int) bool, a []int) []bool {
 	}
 	return result
 }
-}
