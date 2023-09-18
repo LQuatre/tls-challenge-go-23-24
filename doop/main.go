@@ -4,12 +4,18 @@ import "os"
 
 func Atoi(s string) (int, string) {
 	var res int
+	var sign int = 1
 	for _, v := range s {
-		if v < '0' || v > '9' {
+		if v == '-' && res == 0 {
+			sign = -1
+		} else if v == '+' && res == 0 {
+			sign = 1
+		} else if v < '0' || v > '9' {
 			return 0, "marche pas"
 		}
 		res = res*10 + int(v-'0')
 	}
+	res *= sign
 	return res, "ok"
 }
 
