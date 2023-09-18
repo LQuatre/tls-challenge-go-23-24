@@ -20,7 +20,6 @@ func Atoi(s string) (int, string) {
 			return 0, "error"
 		}
 	}
-	println(Itoa(res))
 	if res >= 9223372036854775807 && sign == 1 {
 		return 0, "error"
 	}
