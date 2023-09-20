@@ -5,27 +5,38 @@ type NodeI struct {
 	Next *NodeI
 }
 
-func SortListInsert(l *NodeI, data_ref int) *NodeI {
-	n := &NodeI{Data: data_ref}
-	if l == nil {
-		return n
+func ListSort(l *NodeI) *NodeI {
+	if l == nil || l.Next == nil {
+		return l
 	}
-	if data_ref < l.Data {
-		n.Next = l
-		return n
+
+	var prev *NodeI
+	slow, fast := l, l
+
+	for fast != nil && fast.Next != nil {
+		prev = slow
+		slow = slow.Next
+		fast = fast.Next.Next
 	}
-	iterator := l
-	for iterator.Next != nil && iterator.Next.Data < data_ref {
-		iterator = iterator.Next
-	}
-	n.Next = iterator.Next
-	iterator.Next = n
-	return l
+
+	prev.Next = nil
+
+	return merge(ListSort(l), ListSort(slow))
 }
 
-func ListSort(l *NodeI) *NodeI {
-	if l == nil {
-		return nil
+func merge(l1, l2 *NodeI) *NodeI {
+	if l1 == nil {
+		return l2
 	}
-	return SortListInsert(l, l.Data)
+	if l2 == nil {
+		return l1
+	}
+
+	if l1.Data < l2.Data {
+		l1.Next = merge(l1.Next, l2)
+		return l1
+	}
+
+	l2.Next = merge(l1, l2.Next)
+	return l2
 }
