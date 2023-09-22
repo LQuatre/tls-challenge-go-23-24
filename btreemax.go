@@ -1,4 +1,4 @@
-package psicne
+package piscine
 
 func BTreeMax(root *TreeNode) *TreeNode {
 	if root == nil {
